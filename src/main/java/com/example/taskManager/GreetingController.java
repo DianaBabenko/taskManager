@@ -37,10 +37,10 @@ public class GreetingController {
     public String add(
             @RequestParam String text,
             @RequestParam String tag,
-            @RequestParam Project projectName,
+            Project project,
             Map<String, Object> model
     ) {
-        Task task = new Task(text, tag, projectName);
+        Task task = new Task(text, tag);
         taskRepository.save(task);
 
         Iterable<Task> tasks = taskRepository.findAll();

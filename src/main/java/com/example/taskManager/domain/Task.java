@@ -17,10 +17,14 @@ public class Task {
     @JoinColumn(name = "project_id")
     private Project project;
 
-    public Task(String text, String tag, Project project) {
-        this.project = project;
+    public Task(String text, String tag) {
+        
         this.text = text;
         this.tag = tag;
+    }
+
+    public String getProjectName() {
+        return project != null ? project.getName() : "<none>";
     }
 
     public Task() {
