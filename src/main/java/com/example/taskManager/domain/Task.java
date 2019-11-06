@@ -1,6 +1,7 @@
 package com.example.taskManager.domain;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 
 @Entity
@@ -18,7 +19,7 @@ public class Task {
     private Project project;
 
     public Task(String text, String tag) {
-        this.project = project;
+
         this.text = text;
         this.tag = tag;
     }

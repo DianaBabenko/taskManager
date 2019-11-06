@@ -1,9 +1,8 @@
 package com.example.taskManager.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Project {
@@ -12,6 +11,14 @@ public class Project {
     private Integer id;
 
     private String name;
+
+    public Project(String name) {
+        this.name = name;
+    }
+
+    public Project() {
+
+    }
 
     public Integer getId() {
         return id;
@@ -29,5 +36,15 @@ public class Project {
         this.name = name;
     }
 
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks = new ArrayList<Task>();
+
+    public List<Task> getTasks() {
+        return this.tasks;
+    }
+
+    public void setMonths(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 
 }

@@ -9,6 +9,11 @@
         <form method="post">
             <input type="text" name = "text" placeholder="Enter the task" required/>
             <input type="text" name = "tag" placeholder="Enter the task" required/>
+
+                {{#projects}}
+                <input type="radio" name = "projectValue" value="{{name}}"/>{{name}}
+                {{/projects}}
+
             <button type="submit">Add</button>
         </form>
     </div>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class GreetingController {
@@ -45,17 +46,20 @@ public class GreetingController {
     public String add(
             @RequestParam String text,
             @RequestParam String tag,
-
+            @RequestParam String projectValue,
             Map<String, Object> model
     ) {
-       /* Project project = new Project();
-        project = projectRepository.findById(projectValue)
+        /*Optional<Project> projects = projectRepository.findById(projectValue);
+        Project project = new Project(projects);*/
+        Project projects = new Project(projectValue);
+        projectRepository.save(projects);
 
-*/
         Task task = new Task(text, tag);
+        task.setProject(projects);
         taskRepository.save(task);
 
         Iterable<Task> tasks = taskRepository.findAll();
+
         model.put("tasks", tasks);
         return "main";
     }
