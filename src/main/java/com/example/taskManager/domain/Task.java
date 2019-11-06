@@ -18,7 +18,7 @@ public class Task {
     private Project project;
 
     public Task(String text, String tag) {
-        
+        this.project = project;
         this.text = text;
         this.tag = tag;
     }
