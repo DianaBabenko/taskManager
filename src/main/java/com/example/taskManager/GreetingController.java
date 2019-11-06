@@ -51,7 +51,8 @@ public class GreetingController {
     ) {
         /*Optional<Project> projects = projectRepository.findById(projectValue);
         Project project = new Project(projects);*/
-        Project projects = new Project(projectValue);
+        Project projects = new Project();
+        projects.setName(projectValue);
         projectRepository.save(projects);
 
         Task task = new Task(text, tag);
