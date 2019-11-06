@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Main page</title>
+</head>
+<body>
+    <div>
+        <form method="post">
+            <input type="text" name = "text" placeholder="Enter the task" required/>
+            <input type="text" name = "tag" placeholder="Enter the task" required/>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+
+    <div>
+        <h3>List of tasks</h3>
+        {{#tasks}}
+            <div>
+                <b>{{id}}</b>
+                <span>{{text}}</span>
+                <italic>{{tag}}</italic>
+                <strong>{{projectName}}</strong>
+            </div>
+        {{/tasks}}
+    </div>
+</body>
+</html>
