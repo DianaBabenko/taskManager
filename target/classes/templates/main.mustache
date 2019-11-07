@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Main page</title>
+</head>
+<body>
+<div>
+    Add
+    <form method="post">
+        <label for="taskName">Task </label>
+        <input id="taskName" type="text" name = "text" placeholder="Enter the task" required/>
+
+        <label for="tagName">Tag </label>
+        <input id="tagName" type="text" name = "tag" placeholder="Enter the task" required/>
+
+        <label for="projName">Choose project: </label>
+        {{#projects}}
+            <input type="radio" id="projName" name = "projectValue" value="{{id}}"/>{{name}}
+        {{/projects}}
+
+
+        <button type="submit">Add</button>
+    </form>
+
+    Edit
+    <form method="post" action="/main/edit">
+        <input type="text" name="idTaskEdit" placeholder="id task"/>
+        <input type="text" name="updateText" placeholder="New Tex"/>
+        <input type="text" name="updateTag" placeholder="New Tag"/>
+        <button type="submit">Edit</button>
+    </form>
+
+    Delete
+    <form method="post" action="/main/delete">
+        <input type="text" name="idTaskDel" placeholder="id task del" />
+        <button type="submit">Delete</button>
+    </form>
+</div>
+
+<div>
+    <h3>List of tasks</h3>
+    {{#tasks}}
+        <div>
+            <b>{{id}}</b>
+            <span>{{text}}</span>
+            <u>{{tag}}</u>
+            <strong>{{projectName}}</strong>
+        </div>
+    {{/tasks}}
+</div>
+</body>
+</html>

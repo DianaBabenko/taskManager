@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Greeting</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+    <div>
+        <h3>List of tasks</h3>
+        {{#tasks}}
+            <div>
+                <b>{{id}}</b>
+                <span>{{text}}</span>
+                <u>{{tag}}</u>
+                <strong>{{projectName}}</strong>
+            </div>
+        {{/tasks}}
+    </div>
+
+</body>
+</html>
