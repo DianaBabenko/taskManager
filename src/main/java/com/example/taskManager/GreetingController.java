@@ -46,17 +46,13 @@ public class GreetingController {
     public String add(
             @RequestParam String text,
             @RequestParam String tag,
-            @RequestParam String projectValue,
+            @RequestParam Integer projectValue,
             Map<String, Object> model
     ) {
-        /*Optional<Project> projects = projectRepository.findById(projectValue);
-        Project project = new Project(projects);*/
-        Project projects = new Project();
-        projects.setName(projectValue);
-        projectRepository.save(projects);
+       Optional<Project> projects = projectRepository.findById(projectValue);
 
         Task task = new Task(text, tag);
-        task.setProject(projects);
+        task.setProject(projects.get());
         taskRepository.save(task);
 
         Iterable<Task> tasks = taskRepository.findAll();
