@@ -6,6 +6,7 @@
 </head>
 <body>
 <div>
+    Add
     <form method="post">
         <label for="taskName">Task </label>
         <input id="taskName" type="text" name = "text" placeholder="Enter the task" required/>
@@ -18,7 +19,22 @@
             <input type="radio" id="projName" name = "projectValue" value="{{id}}"/>{{name}}
         {{/projects}}
 
+
         <button type="submit">Add</button>
+    </form>
+
+    Edit
+    <form method="post" action="/main/edit">
+        <input type="text" name="idTaskEdit" placeholder="id task"/>
+        <input type="text" name="updateText" placeholder="New Tex"/>
+        <input type="text" name="updateTag" placeholder="New Tag"/>
+        <button type="submit">Edit</button>
+    </form>
+
+    Delete
+    <form method="post" action="/main/delete">
+        <input type="text" name="idTaskDel" placeholder="id task del" />
+        <button type="submit">Delete</button>
     </form>
 </div>
 

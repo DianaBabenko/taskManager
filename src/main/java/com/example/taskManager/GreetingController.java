@@ -53,6 +53,7 @@ public class GreetingController {
 
         Task task = new Task(text, tag);
         task.setProject(projects.get());
+
         taskRepository.save(task);
 
         Iterable<Task> tasks = taskRepository.findAll();
@@ -60,5 +61,38 @@ public class GreetingController {
         model.put("tasks", tasks);
         return "main";
     }
+
+    @PostMapping("/main/edit")
+    public String editTask(
+            @RequestParam String updateText,
+            @RequestParam String updateTag,
+            @RequestParam Integer idTaskEdit,
+            Map<String, Object> model
+    ) {
+        Optional<Task> task = taskRepository.findById(idTaskEdit);
+        task.get().setId(idTaskEdit);
+        task.get().setText(updateText);
+        task.get().setTag(updateTag);
+        taskRepository.save(task.get());
+
+        Iterable<Task> tasks = taskRepository.findAll();
+
+        model.put("tasks", tasks);
+        return "main";
+    }
+
+    @PostMapping("/main/delete")
+    public String delTask(
+            @RequestParam Integer idTaskDel,
+            Map<String, Object> model
+    ) {
+        taskRepository.deleteById(idTaskDel);
+
+        Iterable<Task> tasks = taskRepository.findAll();
+
+        model.put("tasks", tasks);
+        return "main";
+    }
+
 
 }
