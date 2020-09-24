@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Main page</title>
+</head>
+<body>
+    <div>
+        <h3>New task</h3>
+        <form method="post" action="/tasks/add">
+            <div style="margin-bottom: 10px;">
+                <span style="margin-right: 7px;">
+                    <label for="taskName">Task </label>
+                    <input id="taskName" type="text" name = "text" placeholder="Enter the task" required/>
+                </span>
+                <span>
+                    <label for="tagName">Tag </label>
+                    <input id="tagName" type="text" name = "tag" placeholder="Enter the tag for task" required/>
+                </span>
+            </div>
+            <div style="margin-bottom: 7px;">
+                <label for="projectSelect">Choose project: </label>
+                <select id="projectSelect" name="projectValue">
+                    {{#projects}}
+                        <option id="projName{{id}}" value="{{id}}">{{name}}</option>
+                        <!--                        <input type="radio" id="projName" name="projectValue" value="{{id}}"/>{{name}}-->
+                    {{/projects}}
+                </select>
+            </div>
+            <span>
+                <button type="submit" style="margin-right: 10px;">Add</button>
+                <a href="/tasks" style="text-decoration: none; margin-top: 10px">
+                    <span>Back to tasks</span>
+                </a>
+            </span>
+        </form>
+
+    </div>
+</body>
+</html>

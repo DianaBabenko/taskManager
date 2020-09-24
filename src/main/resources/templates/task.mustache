@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Main page</title>
+</head>
+<body>
+    <div>
+        <div>
+            <form method="post" id="form-delete" action="/tasks/delete" hidden>
+                <input type="text" name="idTaskDel" id="idTask" placeholder="id task del" />
+                <button type="submit" id="deleteTask"></button>
+            </form>
+            <form method="get" id="form-edit-get" action="/tasks/edit" hidden>
+                <input type="text" name="idTaskEdit" id="idTaskEdit" placeholder="id task del" />
+                <button type="submit" id="editTaskGet"></button>
+            </form>
+        </div>
+
+        <div>
+            <div>
+                <h3>List of tasks</h3>
+            </div>
+            <div style="margin-bottom: 10px;">
+                {{#tasks}}
+                    <div>
+                        <b>{{id}}</b>
+                        <span>{{text}}</span>
+                        <u>{{tag}}</u>
+                        <strong>{{projectName}}</strong>
+                        <span onclick="editTask({{id}})" class="my-2">EDIT</span>
+                        <span onclick="deleteTask({{id}})">X</span>
+                    </div>
+                {{/tasks}}
+            </div>
+
+            <a href="/tasks/add" style="text-decoration: none;"><span>Add new</span></a>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<script>
+    function deleteTask(id)
+    {
+        let form = document.getElementById("form-delete");
+
+        document.getElementById('idTask').value = id;
+        form.submit();
+    }
+
+    function editTask(id)
+    {
+        console.log(id);
+        document.getElementById('idTaskEdit').value = id;
+        document.getElementById("form-edit-get").submit();
+    }
+</script>

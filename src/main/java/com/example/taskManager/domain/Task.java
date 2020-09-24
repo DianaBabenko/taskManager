@@ -28,6 +28,8 @@ public class Task {
         return project != null ? project.getName() : "<none>";
     }
 
+    public Integer getProjectId() { return project != null ? project.getId() : 0; }
+
     public Task() {
     }
 

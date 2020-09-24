@@ -7,10 +7,8 @@ import com.example.taskManager.repository.TaskRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Map;
 import java.util.Optional;
@@ -32,18 +30,43 @@ public class GreetingController {
         return "greeting";
     }
 
-    @GetMapping
+    @GetMapping("/tasks/add")
+    public String create(Map<String, Object> model) {
+
+        Iterable<Project> projects = projectRepository.findAll();
+        model.put("projects", projects);
+        return "add";
+    }
+
+    @GetMapping("/tasks/edit")
+    public String edit(
+            @RequestParam (name="idTaskEdit") Integer idTaskEdit,
+            Map<String, Object> model
+    ) {
+        Optional<Task> task = taskRepository.findById(idTaskEdit);
+        Iterable<Project> projects = projectRepository.findAll();
+
+        model.put("idTask", idTaskEdit);
+        model.put("tag", task.get().getTag());
+        model.put("text", task.get().getText());
+        model.put("projectId", task.get().getProjectId());
+        model.put("projects", projects);
+
+        return "edit";
+    }
+
+    @GetMapping("/tasks")
     public String main(Map<String, Object> model, Map<String, Object> modelProj) {
         Iterable<Task> tasks = taskRepository.findAll();
         model.put("tasks", tasks);
 
         Iterable<Project> projects = projectRepository.findAll();
         modelProj.put("projects", projects);
-        return "main";
+        return "task";
     }
 
-    @PostMapping
-    public String add(
+    @PostMapping("/tasks/add")
+    public RedirectView addTask(
             @RequestParam String text,
             @RequestParam String tag,
             @RequestParam Integer projectValue,
@@ -59,39 +82,43 @@ public class GreetingController {
         Iterable<Task> tasks = taskRepository.findAll();
 
         model.put("tasks", tasks);
-        return "main";
+        return new RedirectView("");
     }
 
-    @PostMapping("/main/edit")
-    public String editTask(
+    @PostMapping("/tasks/edit")
+    public RedirectView editTask(
             @RequestParam String updateText,
             @RequestParam String updateTag,
             @RequestParam Integer idTaskEdit,
+            @RequestParam Integer projectValue,
             Map<String, Object> model
     ) {
         Optional<Task> task = taskRepository.findById(idTaskEdit);
+        Optional<Project> projects = projectRepository.findById(projectValue);
+
         task.get().setId(idTaskEdit);
         task.get().setText(updateText);
         task.get().setTag(updateTag);
+        task.get().setProject(projects.get());
         taskRepository.save(task.get());
 
         Iterable<Task> tasks = taskRepository.findAll();
 
         model.put("tasks", tasks);
-        return "main";
+        return new RedirectView("");
     }
 
-    @PostMapping("/main/delete")
-    public String delTask(
-            @RequestParam Integer idTaskDel,
-            Map<String, Object> model
+    @PostMapping("/tasks/delete")
+    public RedirectView delTask(
+            @RequestParam Integer idTaskDel
+            //Map<String, Object> model
     ) {
         taskRepository.deleteById(idTaskDel);
 
-        Iterable<Task> tasks = taskRepository.findAll();
-
-        model.put("tasks", tasks);
-        return "main";
+//        Iterable<Task> tasks = taskRepository.findAll();
+//
+//        model.put("tasks", tasks);
+        return new RedirectView("");
     }
 
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Main page</title>
+</head>
+<body>
+<div>
+    Edit task
+    <form method="post" action="/tasks/edit">
+        <div style="margin-bottom: 10px;">
+            <input type="number" id="taskName" name="idTaskEdit" value="{{idTask}}" hidden>
+            <span style="margin-right: 7px;">
+                <label for="taskName">Task </label>
+                <input type="text" id="tagName" name="updateText" placeholder="Text" value="{{text}}"/>
+            </span>
+            <span>
+                <label for="tagName">Tag </label>
+                <input type="text" name="updateTag" placeholder="Tag" value="{{tag}}"/>
+            </span>
+        </div>
+        <div style="margin-bottom: 7px;">
+            <label for="projectSelect">Choose project: </label>
+            <select id="projectSelect" name="projectValue">
+                {{#projects}}
+                    <option id="projName{{id}}" value="{{id}}">{{name}}</option>
+                    renderId({{id}}, {{projectId}});
+                {{/projects}}
+            </select>
+        </div>
+        <button type="submit">Edit</button>
+    </form>
+</div>
+
+<script>
+    function renderId(id, projectId) {
+        if (id === projectId) {
+            document.getElementById("projName"+id).selected = 'selected';
+        }
+    }
+</script>
+</body>
+</html>
