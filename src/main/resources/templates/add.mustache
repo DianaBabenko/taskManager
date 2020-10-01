@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Main page</title>
-</head>
-<body>
-    <div>
-        <h3>New task</h3>
-        <form method="post" action="/tasks/add">
-            <div style="margin-bottom: 10px;">
-                <span style="margin-right: 7px;">
-                    <label for="taskName">Task </label>
-                    <input id="taskName" type="text" name = "text" placeholder="Enter the task" required/>
-                </span>
-                <span>
-                    <label for="tagName">Tag </label>
-                    <input id="tagName" type="text" name = "tag" placeholder="Enter the tag for task" required/>
-                </span>
-            </div>
-            <div style="margin-bottom: 7px;">
-                <label for="projectSelect">Choose project: </label>
-                <select id="projectSelect" name="projectValue">
-                    {{#projects}}
-                        <option id="projName{{id}}" value="{{id}}">{{name}}</option>
-                        <!--                        <input type="radio" id="projName" name="projectValue" value="{{id}}"/>{{name}}-->
-                    {{/projects}}
-                </select>
-            </div>
-            <span>
-                <button type="submit" style="margin-right: 10px;">Add</button>
-                <a href="/tasks" style="text-decoration: none; margin-top: 10px">
-                    <span>Back to tasks</span>
-                </a>
-            </span>
-        </form>
-
-    </div>
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <title>Main page</title>
+    </head>
+    <body>
+        <div class="">
+            <h3 style="text-align: center" class="mt-3 mb-3">New task</h3>
+            <form method="post" action="/tasks/add">
+                <div class="" style="margin-left: 18%">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="taskName">Task </label>
+                            <input id="taskName" type="text" name="text" class="form-control" placeholder="Enter the task" required/>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="tagName">Tag </label>
+                            <input id="tagName" type="text" name="tag" class="form-control" placeholder="Enter the tag for task" required/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-10">
+                            <label for="descriptionName">Description</label>
+                            <textarea class="form-control" id="descriptionName" name="description" placeholder="Enter the description of task" required> </textarea>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <span class="mt-5">
+                        <button type="submit" class="btn btn-info">Add</button>
+                        <a href="/tasks" style="text-decoration: none;" class="btn btn-dark">
+                            <span>Back to tasks</span>
+                        </a>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </body>
 </html>

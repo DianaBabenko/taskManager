@@ -1,43 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Main page</title>
-</head>
-<body>
-<div>
-    Edit task
-    <form method="post" action="/tasks/edit">
-        <div style="margin-bottom: 10px;">
-            <input type="number" id="taskName" name="idTaskEdit" value="{{idTask}}" hidden>
-            <span style="margin-right: 7px;">
-                <label for="taskName">Task </label>
-                <input type="text" id="tagName" name="updateText" placeholder="Text" value="{{text}}"/>
-            </span>
-            <span>
-                <label for="tagName">Tag </label>
-                <input type="text" name="updateTag" placeholder="Tag" value="{{tag}}"/>
-            </span>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <title>Main page</title>
+    </head>
+    <body>
+        <div>
+            <h3 style="text-align: center" class="mt-3 mb-3">Edit task</h3>
+            <form method="post" action="/tasks/edit">
+                <div class="" style="margin-left: 18%">
+                    <div class="form-row">
+                        <input type="number" id="taskName" name="idTaskEdit" value="{{idTask}}" hidden>
+                        <div class="form-group col-md-5">
+                            <label for="taskName">Task</label>
+                            <input type="text" id="tagName" class="form-control" name="updateText" placeholder="Text" value="{{text}}" required/>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="tagName">Tag</label>
+                            <input type="text" name="updateTag" class="form-control" placeholder="Tag" value="{{tag}}" required/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-10">
+                            <label for="descriptionName">Description</label>
+                            <textarea class="form-control" id="descriptionName" name="updateDescription" placeholder="Enter the description of task" required>
+                                {{description}}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <span class="mt-5">
+                        <button class="btn btn-success" type="submit">Save changes</button>
+                    </span>
+                </div>
+            </form>
         </div>
-        <div style="margin-bottom: 7px;">
-            <label for="projectSelect">Choose project: </label>
-            <select id="projectSelect" name="projectValue">
-                {{#projects}}
-                    <option id="projName{{id}}" value="{{id}}">{{name}}</option>
-                    renderId({{id}}, {{projectId}});
-                {{/projects}}
-            </select>
-        </div>
-        <button type="submit">Edit</button>
-    </form>
-</div>
-
-<script>
-    function renderId(id, projectId) {
-        if (id === projectId) {
-            document.getElementById("projName"+id).selected = 'selected';
-        }
-    }
-</script>
-</body>
+    </body>
 </html>

@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Main page</title>
-</head>
-<body>
-    <div>
-        <div>
-            <form method="post" id="form-delete" action="/tasks/delete" hidden>
-                <input type="text" name="idTaskDel" id="idTask" placeholder="id task del" />
-                <button type="submit" id="deleteTask"></button>
-            </form>
-            <form method="get" id="form-edit-get" action="/tasks/edit" hidden>
-                <input type="text" name="idTaskEdit" id="idTaskEdit" placeholder="id task del" />
-                <button type="submit" id="editTaskGet"></button>
-            </form>
-        </div>
-
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <title>Main page</title>
+    </head>
+    <body>
         <div>
             <div>
-                <h3>List of tasks</h3>
-            </div>
-            <div style="margin-bottom: 10px;">
-                {{#tasks}}
-                    <div>
-                        <b>{{id}}</b>
-                        <span>{{text}}</span>
-                        <u>{{tag}}</u>
-                        <strong>{{projectName}}</strong>
-                        <span onclick="editTask({{id}})" class="my-2">EDIT</span>
-                        <span onclick="deleteTask({{id}})">X</span>
-                    </div>
-                {{/tasks}}
+                <form method="post" id="form-delete" action="/tasks/delete" hidden>
+                    <input type="text" name="idTaskDel" id="idTask" placeholder="id task del" />
+                    <button type="submit" id="deleteTask"></button>
+                </form>
+                <form method="get" id="form-edit-get" action="/tasks/edit" hidden>
+                    <input type="text" name="idTaskEdit" id="idTaskEdit" placeholder="id task del" />
+                    <button type="submit" id="editTaskGet"></button>
+                </form>
             </div>
 
-            <a href="/tasks/add" style="text-decoration: none;"><span>Add new</span></a>
+            <h3 style="text-align: center" class="mt-3 mb-3">Tasks</h3>
+            <table class="table">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Text</th>
+                    <th scope="col">Tag</th>
+                    <th scope="col">Description</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                {{#tasks}}
+                    <tr>
+                        <th scope="row">{{id}}</th>
+                        <td>{{text}}</td>
+                        <td>{{tag}}</td>
+                        <td>{{description}}</td>
+                        <td><span onclick="editTask({{id}})" style="cursor: pointer" class="my-2 badge badge-pill badge-warning">EDIT</span></td>
+                        <td><span onclick="deleteTask({{id}})" style="cursor: pointer" class="badge badge-pill badge-danger">X</span></td>
+                    </tr>
+                {{/tasks}}
+            </table>
         </div>
+    <div style="text-align: center;">
+        <a href="/tasks/add" class="btn btn-warning m-0"><span>Add new</span></a>
     </div>
-</body>
+    </body>
 </html>
 
 
